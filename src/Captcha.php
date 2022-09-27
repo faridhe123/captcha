@@ -502,7 +502,7 @@ class Captcha
      * @return string
      */
     protected function get_cache_key($key) {
-        return 'captcha_' . md5($key);
+        return env('MY_SECRET').'captcha_' . md5($key);
     }
 
     /**
@@ -513,11 +513,13 @@ class Captcha
      * @param string $config
      * @return bool
      */
-    public function check_api($value, $key, $config = 'default'): bool
+    public function check_api($value, $key, $config = 'default',bool $reset): bool
     {
-        if (!Cache::pull($this->get_cache_key($key))) {
-            return false;
-        }
+//        return false;
+        if($reset)
+            if (!Cache::pull($this->get_cache_key($key))) {
+                return false;
+            }
 
         $this->configure($config);
 

@@ -55,8 +55,8 @@ if (!function_exists('captcha_api_check')) {
      * @param string $config
      * @return bool
      */
-    function captcha_api_check(string $value, string $key, string $config = 'default'): bool
+    function captcha_api_check(string $value, string $key, string $config = 'default', bool $reset = true): bool
     {
-        return app('captcha')->check_api($value, $key, $config);
+        return app('captcha')->check_api($value, $key, $config, $reset);
     }
 }
